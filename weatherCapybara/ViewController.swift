@@ -29,6 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         currentWeather.downloadWeatherDetails {
             //setup UI to download data 
+            
+            //func updateMainUI
         }
         
     }
