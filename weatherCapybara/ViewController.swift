@@ -29,8 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         currentWeather.downloadWeatherDetails {
             //setup UI to download data 
+            self.updateMainUI()
             
-            //func updateMainUI
         }
         
     }
@@ -47,6 +47,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
         
         return cell
+    }
+    
+    func updateMainUI() {
+        dateLabel.text = currentWeather.date
+        currentTempLabel.text = String(format: "%.0f", currentWeather.currentTepm) + " °C"
+        //"\(currentWeather.currentTepm)"
+        currentWeatherTypeLabel.text = currentWeather.weatherType
+        locationLabel.text = currentWeather.cityName
+        currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
+        
     }
 
 }
