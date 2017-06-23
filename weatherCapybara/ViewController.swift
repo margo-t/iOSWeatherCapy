@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,7 +19,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
-    var currentWeather = CurrentWeather()
+    var currentWeather: CurrentWeather!
+    var forecast: Forecast!
+    var forecasts = [Forecast]()
     
     
     override func viewDidLoad() {
@@ -27,9 +30,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
+        currentWeather = CurrentWeather()
+        //forecast = Forecast()
+        
         currentWeather.downloadWeatherDetails {
+            
             //setup UI to download data 
-            self.updateMainUI()
+            self.downloadForecastData{
+                self.updateMainUI()
+
+            }
             
         }
         
@@ -52,12 +62,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func updateMainUI() {
         dateLabel.text = currentWeather.date
         currentTempLabel.text = String(format: "%.0f", currentWeather.currentTepm) + " °C"
-        //"\(currentWeather.currentTepm)"
         currentWeatherTypeLabel.text = currentWeather.weatherType
         locationLabel.text = currentWeather.cityName
         currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
-        
     }
+    
+    
+    func downloadForecastData(completed: @escaping DownloadComplete){
+        
+        //Alamofire download
+        let forecastURL = URL(string: FORECAST_WEATHER_URL)!
+        Alamofire.request(forecastURL).responseJSON { response in
+            let result = response.result
+            
+            if let dict = result.value as? Dictionary<String, AnyObject> {
+                
+                if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
+                    
+                    for  obj in list {
+                        
+                        let forecast = Forecast(weatherDict: obj)
+                        self.forecasts.append(forecast)
+                        print(obj)
+                    }
+                }
+            }
+            completed()
+        }
+    }
+
 
 }
 
