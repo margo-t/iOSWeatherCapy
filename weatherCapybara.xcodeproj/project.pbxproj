@@ -91,11 +91,11 @@
 				8D6B8C541EFC52D70013B027 /* Constants.swift */,
 				8D6B8C561EFC60590013B027 /* CurrentWeather.swift */,
 				8D6B8C581EFD47890013B027 /* Forecast.swift */,
+				8D6B8C5A1EFDD4450013B027 /* WeatherCell.swift */,
 				8D6B8C461EFAF3940013B027 /* Main.storyboard */,
 				8D6B8C491EFAF3940013B027 /* Assets.xcassets */,
 				8D6B8C4B1EFAF3940013B027 /* LaunchScreen.storyboard */,
 				8D6B8C4E1EFAF3940013B027 /* Info.plist */,
-				8D6B8C5A1EFDD4450013B027 /* WeatherCell.swift */,
 			);
 			path = weatherCapybara;
 			sourceTree = "<group>";

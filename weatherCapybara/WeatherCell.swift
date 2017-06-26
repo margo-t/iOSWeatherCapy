@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import Foundation
 
 class WeatherCell: UITableViewCell {
+    
+    @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var weatherTypeLabel: UILabel!
+    @IBOutlet weak var highTemp: UILabel!
+    @IBOutlet weak var lowTemp: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +27,18 @@ class WeatherCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configureCell(forecast: Forecast) {
+        
+        lowTemp.text = "\(forecast.lowTemp) °C"
+        
+        highTemp.text = "\(forecast.highTemp) °C"
+    
+        
+        weatherTypeLabel.text = forecast.weatherType
+        weatherIcon.image = UIImage(named: forecast.weatherType)
+        dayLabel.text = forecast.date
     }
 
 }
