@@ -81,7 +81,7 @@ class CurrentWeather {
                 if let weather = dict["weather"] as? [Dictionary<String, AnyObject>]{
                     if let main = weather[0]["main"] as? String {
                         self._weatherType = main.capitalized
-                        print(self._weatherType)
+                        //print(self._weatherType)
                     }
                 }
                 
@@ -90,7 +90,7 @@ class CurrentWeather {
                         let kelvinToCelsius = (currentTemp - 273.15)
                         
                         self._currentTepm = kelvinToCelsius
-                        print(self._currentTepm)
+                        //print(self._currentTepm)
                     }
                 }
             }
